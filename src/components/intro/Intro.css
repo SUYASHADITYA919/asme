@@ -1,0 +1,343 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+.celestial-scene {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: #030509;
+}
+
+.celestial-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.crt-intro {
+  --crt-green: #b9ffca;
+  --crt-dim: #5c9770;
+  --crt-white: #f0f5f1;
+
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+  background: transparent;
+  color: var(--crt-white);
+  font-family: "DM Mono", monospace;
+}
+
+.crt-grid,
+.crt-scanlines,
+.crt-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.crt-grid {
+  z-index: -3;
+  background-image:
+    linear-gradient(#9bffb50b 1px, transparent 1px),
+    linear-gradient(90deg, #9bffb50b 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.crt-scanlines {
+  z-index: 10;
+  opacity: 0.13;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 2px,
+    #000 3px,
+    #000 4px
+  );
+}
+
+.crt-vignette {
+  z-index: 9;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 25%,
+    #00000055 72%,
+    #000000cc 120%
+  );
+}
+
+.crt-header,
+.crt-footer {
+  position: absolute;
+  z-index: 12;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 28px 5vw;
+  color: var(--crt-dim);
+  font-size: 10px;
+  letter-spacing: 1.3px;
+}
+
+.crt-header {
+  top: 0;
+}
+
+.crt-footer {
+  bottom: 0;
+  font-size: 9px;
+}
+
+.crt-brand {
+  color: var(--crt-white);
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.crt-brand span {
+  margin-left: 8px;
+  color: var(--crt-dim);
+  font-family: "DM Mono", monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.crt-live {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.crt-live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--crt-green);
+  box-shadow: 0 0 12px #7dffa0;
+  animation: crt-blink 1s steps(2, start) infinite;
+}
+
+.crt-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 24px;
+}
+
+.crt-main-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vw, 40px);
+  width: 100%;
+}
+
+.crt-as {
+  flex: 0 0 auto;
+  color: #f3f5f4;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(100px, 18vw, 230px);
+  font-weight: 700;
+  letter-spacing: -0.11em;
+  line-height: 0.9;
+  text-shadow: 0 0 35px #ffffff12;
+  user-select: none;
+}
+
+.crt-object-frame {
+  position: relative;
+  width: clamp(150px, 24vw, 330px);
+  height: clamp(150px, 24vw, 330px);
+  flex: 0 1 auto;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.three-scene,
+.three-scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+}
+
+.crt-object-label {
+  align-self: center;
+  width: min(100%, 480px);
+  margin-top: 18px;
+  color: var(--crt-green);
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-align: center;
+}
+
+.crt-object-label span {
+  color: var(--crt-dim);
+}
+
+.crt-loader {
+  width: min(100%, 480px);
+  margin-top: clamp(36px, 7vh, 65px);
+}
+
+.crt-loader-heading,
+.crt-loader-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: 0.8px;
+}
+
+.crt-loader-heading {
+  color: var(--crt-green);
+}
+
+.crt-prompt,
+.crt-percent {
+  color: #e5ffeb;
+}
+
+.crt-percent {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.crt-progress-track {
+  display: grid;
+  grid-template-columns: repeat(30, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 13px;
+}
+
+.crt-segment {
+  height: 12px;
+  border: 1px solid #6acb8140;
+  background: #8bff9b08;
+  transition: background 0.12s;
+}
+
+.crt-segment.active {
+  border-color: var(--crt-green);
+  background: var(--crt-green);
+  box-shadow: 0 0 8px #85ff9b30;
+}
+
+.crt-loader-bottom {
+  margin-top: 12px;
+  color: var(--crt-dim);
+  font-size: 8px;
+  letter-spacing: 0.4px;
+}
+
+.crt-cursor {
+  display: inline-block;
+  width: 7px;
+  height: 12px;
+  margin-left: 4px;
+  vertical-align: -2px;
+  background: var(--crt-green);
+  animation: crt-blink 0.8s steps(2, start) infinite;
+}
+
+@keyframes crt-blink {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .crt-header,
+  .crt-footer {
+    padding: 20px 5%;
+    font-size: 8px;
+  }
+
+  .crt-brand {
+    font-size: 14px;
+  }
+
+  .crt-brand span {
+    display: block;
+    margin: 3px 0 0;
+    font-size: 8px;
+  }
+
+  .crt-main-mark {
+    gap: 14px;
+  }
+
+  .crt-as {
+    font-size: clamp(80px, 20vw, 125px);
+  }
+
+  .crt-object-frame {
+    width: 42vw;
+    height: 42vw;
+    max-width: 210px;
+    max-height: 210px;
+  }
+
+  .crt-loader-heading {
+    font-size: 8px;
+  }
+
+  .crt-loader-bottom {
+    align-items: flex-start;
+    font-size: 7px;
+  }
+
+  .crt-loader-bottom span:first-child {
+    max-width: 55%;
+  }
+
+  .crt-progress-track {
+    gap: 2px;
+  }
+
+  .crt-segment {
+    height: 9px;
+  }
+
+  .crt-footer span:first-child {
+    max-width: 55%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt-live-dot,
+  .crt-cursor {
+    animation: none;
+  }
+}
+
+.crt-intro {
+  background: transparent;
+}
+
+.crt-object-frame {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
